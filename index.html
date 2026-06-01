@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metaleks — Art métal animé</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <!-- ======= HERO ======= -->
+    <header class="hero">
+      <nav class="nav container">
+        <a href="#" class="logo" aria-label="Accueil Metaleks">
+          <img src="assets/dd-removebg-preview-268x111.png" alt="Logo Metaleks" class="logo-image" />
+        </a>
+        <a href="#configurateur" class="btn btn-outline">Personnaliser</a>
+      </nav>
+
+      <div class="hero-content container">
+        <p class="tag">Design métal pour les jeunes</p>
+        <h1>Des tableaux métal qui bougent avec ton style.</h1>
+        <p class="subtitle">
+          Choisis ton univers animé, tes couleurs et ta finition. Chez Metaleks,
+          chaque tableau est fabriqué sur mesure pour ton espace.
+        </p>
+        <div class="hero-actions">
+          <a href="./metaliks/index.html" class="btn">Voir les collections</a>
+          <a href="#configurateur" class="btn btn-outline">Créer le mien</a>
+        </div>
+      </div>
+
+      <div class="glow glow-1"></div>
+      <div class="glow glow-2"></div>
+    </header>
+
+    <main>
+
+      <!-- ======= FEATURES ======= -->
+      <section class="features-section container">
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">◈</div>
+            <h3>Aluminium HD</h3>
+            <p>Impression directe sur aluminium brossé ou brillant avec des couleurs éclatantes qui ne s'estompent jamais.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">◉</div>
+            <h3>Résistant 50 ans</h3>
+            <p>Résistant à l'humidité, aux UV et aux chocs. Votre souvenir pour les générations futures.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">◎</div>
+            <h3>Livraison 5–7 jours</h3>
+            <p>Fabriqué à la main au Maroc et livré partout avec un emballage sécurisé premium.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= CONFIGURATEUR 3D ======= -->
+      <section id="configurateur" class="customize container">
+
+        <div class="section-header">
+          <span class="section-eyebrow">✦ Configurateur 3D ✦</span>
+          <h2 class="section-title">Créez votre <em>tableau sur mesure</em></h2>
+        </div>
+
+        <div class="configurator">
+
+          <!-- 3D Panel Stage -->
+          <div class="panel-stage">
+            <div class="panel-wrapper" id="panelWrapper">
+              <div class="panel-3d" id="panel3d">
+                <div class="panel-face front" id="panelFront">
+                  <div class="panel-canvas" id="panelCanvas">
+                    <div class="panel-placeholder" id="panelPlaceholder">
+                      <div class="panel-placeholder-icon">⬡</div>
+                      <div class="panel-placeholder-text">Aperçu de votre photo</div>
+                    </div>
+                  </div>
+                  <div class="metal-sheen" id="sheen"></div>
+                </div>
+                <div class="panel-face back"></div>
+                <div class="panel-edge-right"></div>
+                <div class="panel-edge-bottom"></div>
+              </div>
+            </div>
+
+            <div class="panel-controls">
+              <button class="ctrl-btn" id="btnRotLeft" title="Rotation gauche">◀</button>
+              <span class="ctrl-label" id="rotLabel">Auto-rotation</span>
+              <button class="ctrl-btn" id="btnRotRight" title="Rotation droite">▶</button>
+              <button class="ctrl-btn" id="btnPlayPause" title="Pause/Play">⏸</button>
+            </div>
+          </div>
+
+          <!-- Config Panel -->
+          <div class="config-panel">
+
+            <!-- Étape 01 : Upload -->
+            <div class="config-step">
+              <span class="config-step-num">Étape 01</span>
+              <h3 class="config-step-title">Téléchargez votre photo</h3>
+              <div class="upload-box" id="uploadBox">
+                <input type="file" accept="image/*" id="imageInput" onchange="handleImageUpload(this)">
+                <div class="upload-icon">⬆</div>
+                <div class="upload-text">
+                  <strong>Cliquez ou glissez votre image ici</strong><br>
+                  JPG, PNG, HEIC — min. 2000px recommandé
+                </div>
+                <div class="upload-preview-name" id="uploadName"></div>
+              </div>
+            </div>
+
+            <!-- Étape 02 : Format -->
+            <div class="config-step">
+              <span class="config-step-num">Étape 02</span>
+              <h3 class="config-step-title">Choisissez le format</h3>
+              <div class="size-grid">
+                <div class="size-option" data-size="20x30" data-price="350" onclick="selectSize(this)">
+                  <span class="size-dim">20×30</span>
+                  <span class="size-label">cm · Standard</span>
+                </div>
+               
+               
+                <div class="size-option" data-size="50x70" data-price="890" onclick="selectSize(this)">
+                  <span class="size-dim">50×70</span>
+                  <span class="size-label">cm · XL</span>
+                </div>
+                <div class="size-option" data-size="60x90" data-price="1190" onclick="selectSize(this)">
+                  <span class="size-dim">60×90</span>
+                  <span class="size-label">cm · XXL</span>
+                </div>
+               
+              </div>
+            </div>
+
+            <!-- Étape 03 : Finition -->
+            <div class="config-step">
+              <span class="config-step-num">Étape 03</span>
+              <h3 class="config-step-title">Finition du métal</h3>
+              <div class="finish-options">
+                <div class="finish-option active" data-finish="glossy" onclick="selectFinish(this)">
+                  <div class="finish-dot finish-glossy"></div>
+                  <span class="finish-option-text">Brillant</span>
+                </div>
+                <div class="finish-option" data-finish="matte" onclick="selectFinish(this)">
+                  <div class="finish-dot finish-matte"></div>
+                  <span class="finish-option-text">Mat</span>
+                </div>
+                <div class="finish-option" data-finish="brushed" onclick="selectFinish(this)">
+                  <div class="finish-dot finish-brushed"></div>
+                  <span class="finish-option-text">Brossé</span>
+                </div>
+                <div class="finish-option" data-finish="gold" onclick="selectFinish(this)">
+                  <div class="finish-dot finish-gold"></div>
+                  <span class="finish-option-text">Or</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Étape 04 : Commander -->
+            <div class="config-step">
+              <span class="config-step-num">Étape 04</span>
+              <h3 class="config-step-title">Commander</h3>
+
+              <div class="price-row">
+                <span class="price-label">Prix total</span>
+                <span class="price-value" id="priceDisplay">
+                  <span>MAD</span><span id="priceNum">490</span>
+                </span>
+              </div>
+
+              <div class="qty-row">
+                <span class="qty-label">Quantité</span>
+                <div class="qty-ctrl">
+                  <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                  <input type="number" class="qty-val" id="qtyVal" value="1" min="1" max="99" onchange="updatePrice()">
+                  <button class="qty-btn" onclick="changeQty(1)">+</button>
+                </div>
+              </div>
+
+              <button class="btn-add-cart" id="addCartBtn" onclick="addToCart()">
+                ✦ Ajouter au panier
+              </button>
+              <button class="btn-save" onclick="saveConfig()">
+                ☆ Sauvegarder ma configuration
+              </button>
+            </div>
+
+          </div><!-- /config-panel -->
+        </div><!-- /configurator -->
+      </section>
+
+      <!-- ======= GALLERY ======= -->
+      <section class="gallery" id="galerie">
+        <div class="section-header">
+          <span class="section-eyebrow">✦ Réalisations ✦</span>
+          <h2 class="section-title">La <em>galerie</em> Metaleks</h2>
+        </div>
+        <div class="gallery-grid container">
+          <div class="gallery-item">
+            <div class="metal-art large" style="background:linear-gradient(135deg,#1a1a1a,#333,#1a1a1a)"><img src="/site web/assets/the100.jpeg" alt=""></div>
+            <div class="gallery-overlay"><span class="gallery-overlay-text">Paysage montagne · 60×90 cm</span></div>
+          </div>
+          <div class="gallery-item">
+            <div class="metal-art" style="background:linear-gradient(135deg,#222,#2a2a2a)">🌆</div>
+            <div class="gallery-overlay"><span class="gallery-overlay-text">Cityscape · 40×60 cm</span></div>
+          </div>
+          <div class="gallery-item">
+            <div class="metal-art" style="background:linear-gradient(135deg,#1a1a1a,#252525)">🌊</div>
+            <div class="gallery-overlay"><span class="gallery-overlay-text">Océan · 30×40 cm</span></div>
+          </div>
+          <div class="gallery-item">
+            <div class="metal-art" style="background:linear-gradient(135deg,#252525,#1a1a1a)"></div>
+            <div class="gallery-overlay"><span class="gallery-overlay-text">Floral · 20×30 cm</span></div>
+          </div>
+          <div class="gallery-item">
+            <div class="metal-art" style="background:linear-gradient(135deg,#222,#1a1a1a)">🦁</div>
+            <div class="gallery-overlay"><span class="gallery-overlay-text">Portrait animal · 40×40 cm</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= PROCESS ======= -->
+      <section class="process container" id="processus">
+        <div class="section-header">
+          <span class="section-eyebrow">✦ Comment ça marche ✦</span>
+          <h2 class="section-title">Un processus <em>simple</em></h2>
+        </div>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-num">01</div>
+            <div class="step-title">Téléchargez</div>
+            <p class="step-desc">Envoyez votre photo en haute résolution via notre configurateur en ligne.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-num">02</div>
+            <div class="step-title">Personnalisez</div>
+            <p class="step-desc">Choisissez le format, la finition et visualisez en 3D avant de commander.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-num">03</div>
+            <div class="step-title">Production</div>
+            <p class="step-desc">Nos artisans impriment votre tableau sur aluminium HD en 24 heures.</p>
+          </div>
+          <div class="process-step">
+            <div class="step-num">04</div>
+            <div class="step-title">Livraison</div>
+            <p class="step-desc">Emballage sécurisé premium et livraison 3 jours partout au Maroc.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+   
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">Metaleks <em>Atelier</em></div>
+      <p class="footer-desc">L'art de transformer vos souvenirs en œuvres d'art durables sur aluminium. Fait avec passion au Maroc.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#customize">Personnaliser</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#processus">Processus</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Produits</div>
+      <ul class="footer-links">
+        <li><a href="#">Impressions photo</a></li>
+        <li><a href="#">Art abstrait</a></li>
+        <li><a href="#">Portraits</a></li>
+        <li><a href="#">Entreprises</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="mailto:contact@metaleks-atelier.ma">contact@metaleks-atelier.ma</a></li>
+        <li><a href="tel:+212781801862">+212 7 81 80 18 62</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Metaleks Atelier — Tous droits réservés</span>
+    <span class="footer-copy">Fabriqué au Maroc 🇲🇦</span>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+
+<script>
+// State
+let state = {
+  basePrice: 490,
+  qty: 1,
+  selectedSize: '30x40',
+  finish: 'glossy',
+  imageUrl: null,
+  rotAngle: -25,
+  isPlaying: true
+};
+
+// Manual rotation
+let manualAngle = null;
+const wrapper = document.getElementById('panelWrapper');
+const rotLabel = document.getElementById('rotLabel');
+
+document.getElementById('btnRotLeft').addEventListener('click', () => {
+  if (manualAngle === null) manualAngle = -25;
+  manualAngle -= 30;
+  applyManualRotation();
+});
+document.getElementById('btnRotRight').addEventListener('click', () => {
+  if (manualAngle === null) manualAngle = -25;
+  manualAngle += 30;
+  applyManualRotation();
+});
+
+function applyManualRotation() {
+  wrapper.style.animation = 'none';
+  wrapper.style.transform = `rotateY(${manualAngle}deg) rotateX(3deg)`;
+  state.isPlaying = false;
+  document.getElementById('btnPlayPause').textContent = '▶';
+  rotLabel.textContent = `${Math.round(((manualAngle % 360) + 360) % 360)}°`;
+}
+
+document.getElementById('btnPlayPause').addEventListener('click', () => {
+  state.isPlaying = !state.isPlaying;
+  if (state.isPlaying) {
+    manualAngle = null;
+    wrapper.style.transform = '';
+    wrapper.style.animation = 'autoRotate 12s ease-in-out infinite';
+    document.getElementById('btnPlayPause').textContent = '⏸';
+    rotLabel.textContent = 'Auto-rotation';
+  } else {
+    wrapper.style.animation = 'none';
+    document.getElementById('btnPlayPause').textContent = '▶';
+  }
+});
+
+// Drag to rotate
+let isDragging = false;
+let dragStartX = 0, dragStartAngle = 0;
+wrapper.addEventListener('mousedown', (e) => {
+  isDragging = true;
+  dragStartX = e.clientX;
+  dragStartAngle = manualAngle ?? -25;
+  wrapper.style.animation = 'none';
+  state.isPlaying = false;
+  document.getElementById('btnPlayPause').textContent = '▶';
+  e.preventDefault();
+});
+window.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  const delta = (e.clientX - dragStartX) * 0.5;
+  manualAngle = dragStartAngle + delta;
+  wrapper.style.transform = `rotateY(${manualAngle}deg) rotateX(3deg)`;
+  rotLabel.textContent = `${Math.round(((manualAngle % 360) + 360) % 360)}°`;
+});
+window.addEventListener('mouseup', () => { isDragging = false; });
+wrapper.addEventListener('touchstart', (e) => {
+  isDragging = true;
+  dragStartX = e.touches[0].clientX;
+  dragStartAngle = manualAngle ?? -25;
+  wrapper.style.animation = 'none';
+  state.isPlaying = false;
+  document.getElementById('btnPlayPause').textContent = '▶';
+});
+window.addEventListener('touchmove', (e) => {
+  if (!isDragging) return;
+  const delta = (e.touches[0].clientX - dragStartX) * 0.5;
+  manualAngle = dragStartAngle + delta;
+  wrapper.style.transform = `rotateY(${manualAngle}deg) rotateX(3deg)`;
+});
+window.addEventListener('touchend', () => { isDragging = false; });
+
+// Image upload
+function handleImageUpload(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    state.imageUrl = e.target.result;
+    const canvas = document.getElementById('panelCanvas');
+    const placeholder = document.getElementById('panelPlaceholder');
+    placeholder.style.display = 'none';
+    canvas.style.backgroundImage = `url(${state.imageUrl})`;
+    canvas.style.backgroundSize = 'cover';
+    canvas.style.backgroundPosition = 'center';
+    document.getElementById('uploadName').textContent = '✓ ' + file.name;
+    showToast('Photo chargée avec succès !');
+  };
+  reader.readAsDataURL(file);
+}
+
+// Size
+function selectSize(el) {
+  document.querySelectorAll('.size-option').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  state.basePrice = parseInt(el.dataset.price);
+  state.selectedSize = el.dataset.size;
+  updatePrice();
+  updatePanelAspect(el.dataset.size);
+}
+
+function updatePanelAspect(size) {
+  const [w, h] = size.split('x').map(Number);
+  const ratio = w / h;
+  const pw = document.getElementById('panelWrapper');
+  const baseH = 260;
+  const newW = Math.round(baseH * ratio);
+  pw.style.width = newW + 'px';
+  pw.style.height = baseH + 'px';
+}
+
+// Finish
+function selectFinish(el) {
+  document.querySelectorAll('.finish-option').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  state.finish = el.dataset.finish;
+  applyFinish(state.finish);
+}
+
+function applyFinish(finish) {
+  const front = document.getElementById('panelFront');
+  const sheen = document.getElementById('sheen');
+  front.style.background = '';
+  switch(finish) {
+    case 'glossy':
+      front.style.background = '#C8C8C8';
+      sheen.style.opacity = '1';
+      break;
+    case 'matte':
+      front.style.background = 'linear-gradient(135deg, #8a8a8a, #7a7a7a)';
+      sheen.style.opacity = '0.2';
+      break;
+    case 'brushed':
+      front.style.background = 'repeating-linear-gradient(90deg,#aaa 0px,#bbb 1px,#999 2px,#aaa 4px)';
+      sheen.style.opacity = '0.4';
+      break;
+    case 'gold':
+      front.style.background = 'linear-gradient(135deg, #C8A96E, #8B6F3E, #C8A96E)';
+      sheen.style.opacity = '0.8';
+      break;
+  }
+}
+
+// Qty
+function changeQty(delta) {
+  const input = document.getElementById('qtyVal');
+  let v = parseInt(input.value) + delta;
+  v = Math.max(1, Math.min(99, v));
+  input.value = v;
+  state.qty = v;
+  updatePrice();
+}
+
+function updatePrice() {
+  state.qty = parseInt(document.getElementById('qtyVal').value) || 1;
+  document.getElementById('priceNum').textContent = (state.basePrice * state.qty).toLocaleString('fr-MA');
+}
+
+// Cart
+function addToCart() {
+  if (!state.imageUrl) {
+    showToast('⚠ Veuillez d\'abord télécharger votre photo !');
+    return;
+  }
+  showToast(`✦ Tableau ${state.selectedSize} cm ajouté au panier !`);
+}
+
+function saveConfig() {
+  showToast('☆ Configuration sauvegardée dans votre profil.');
+}
+
+// Toast
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// Init
+updatePrice();
+</script>
+  </body>
+</html>
