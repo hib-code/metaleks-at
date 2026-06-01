@@ -11,16 +11,69 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+          .cart-modal{
+            display:none;
+            position:fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            background:rgba(0,0,0,0.6);
+            justify-content:center;
+            align-items:center;
+            z-index:9999;
+          }
+
+          .cart-box{
+            background:#080742;
+            padding:20px;
+            width:90%;
+            max-width:400px;
+            border-radius:10px;
+          }
+    </style>
+
   </head>
   <body>
+    <div id="cartModal" class="cart-modal">
+      <div class="cart-box">
 
+         <h2>🛒 Mon Panier</h2>
+
+         <div id="cartItems"></div>
+
+        <!-- ===== COUPON ===== -->
+        <div style="margin-top:15px;">
+          <input id="promoInput" type="text" placeholder="Code promo"
+                style="width:70%;padding:8px;border-radius:5px;border:none;">
+          <button onclick="applyPromo()" style="padding:8px;">OK</button>
+        </div>
+
+        <!-- ===== TOTAL ===== -->
+        <div style="margin-top:15px;font-size:18px;">
+          <div>Total: <b id="cartTotal">0 MAD</b></div>
+          <div id="discountLine" style="color:lightgreen;"></div>
+        </div>
+
+        <button onclick="sendWhatsAppOrder()" class="btn">
+          Commander sur WhatsApp
+        </button>
+
+        <button onclick="closeCart()" class="btn btn-outline">
+          Fermer
+        </button>
+      </div>
+    </div>
     <!-- ======= HERO ======= -->
     <header class="hero">
       <nav class="nav container">
         <a href="#" class="logo" aria-label="Accueil Metaleks">
           <img src="assets/dd-removebg-preview-268x111.png" alt="Logo Metaleks" class="logo-image" />
         </a>
-        <a href="#configurateur" class="btn btn-outline">Personnaliser</a>
+      <a href="#" onclick="openCart()" class="btn btn-outline">
+        <i class="fa fa-shopping-cart"></i>
+        <span id="cartCount">0</span>
+      </a>
       </nav>
 
       <div class="hero-content container">
@@ -57,7 +110,7 @@
           </div>
           <div class="feature">
             <div class="feature-icon">◎</div>
-            <h3>Livraison 5–7 jours</h3>
+            <h3>Livraison 3 jours</h3>
             <p>Fabriqué à la main au Maroc et livré partout avec un emballage sécurisé premium.</p>
           </div>
         </div>
@@ -199,34 +252,75 @@
       </section>
 
       <!-- ======= GALLERY ======= -->
-      <section class="gallery" id="galerie">
-        <div class="section-header">
-          <span class="section-eyebrow">✦ Réalisations ✦</span>
-          <h2 class="section-title">La <em>galerie</em> Metaleks</h2>
-        </div>
-        <div class="gallery-grid container">
-          <div class="gallery-item">
-            <div class="metal-art large" style="background:linear-gradient(135deg,#1a1a1a,#333,#1a1a1a)"><img src="/site web/assets/the100.jpeg" alt=""></div>
-            <div class="gallery-overlay"><span class="gallery-overlay-text">the 100 · 60×90 cm</span></div>
-          </div>
-          <div class="gallery-item">
-            <div class="metal-art" style="background:linear-gradient(135deg,#222,#2a2a2a)"><img src="/site web/assets/demon.jpeg" alt="" width="100%"></div>
-            <div class="gallery-overlay"><span class="gallery-overlay-text">Demon slayer · 40×60 cm</span></div>
-          </div>
-          <div class="gallery-item">
-            <div class="metal-art" style="background:linear-gradient(135deg,#1a1a1a,#252525)"><img src="/site web/assets/naruto.jpeg" width="90%"></div>
-            <div class="gallery-overlay"><span class="gallery-overlay-text">Océan · 30×40 cm</span></div>
-          </div>
-          <div class="gallery-item">
-            <div class="metal-art" style="background:linear-gradient(135deg,#252525,#1a1a1a)"></div>
-            <div class="gallery-overlay"><span class="gallery-overlay-text">Floral · 20×30 cm</span></div>
-          </div>
-          <div class="gallery-item">
-            <div class="metal-art" style="background:linear-gradient(135deg,#222,#1a1a1a)">🦁</div>
-            <div class="gallery-overlay"><span class="gallery-overlay-text">Portrait animal · 40×40 cm</span></div>
-          </div>
-        </div>
-      </section>
+     <section class="gallery" id="galerie">
+  <div class="section-header">
+    <span class="section-eyebrow">✦ Réalisations ✦</span>
+    <h2 class="section-title">La <em>galerie</em> Metaleks</h2>
+  </div>
+
+  <div class="gallery-grid container">
+
+    <!-- 1 -->
+    <div class="gallery-item"
+         onclick="addGalleryItem('The 100', '60x90')">
+      <div class="metal-art large"
+           style="background:linear-gradient(135deg,#1a1a1a,#333,#1a1a1a)">
+        <img src="/site web/assets/the100.jpeg" alt="The 100">
+      </div>
+      <div class="gallery-overlay">
+        <span class="gallery-overlay-text">The 100 · 60×90 cm</span>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="gallery-item"
+         onclick="addGalleryItem('Demon Slayer', '40x60')">
+      <div class="metal-art"
+           style="background:linear-gradient(135deg,#222,#2a2a2a)">
+        <img src="/site web/assets/demon.jpeg" alt="Demon Slayer" width="100%">
+      </div>
+      <div class="gallery-overlay">
+        <span class="gallery-overlay-text">Demon Slayer · 40×60 cm</span>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="gallery-item"
+         onclick="addGalleryItem('Naruto', '30x40')">
+      <div class="metal-art"
+           style="background:linear-gradient(135deg,#1a1a1a,#252525)">
+        <img src="/site web/assets/naruto.jpeg" width="90%" alt="Naruto">
+      </div>
+      <div class="gallery-overlay">
+        <span class="gallery-overlay-text">Naruto · 30×40 cm</span>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="gallery-item"
+         onclick="addGalleryItem('Floral', '20x30')">
+      <div class="metal-art"
+           style="background:linear-gradient(135deg,#252525,#1a1a1a)">
+      </div>
+      <div class="gallery-overlay">
+        <span class="gallery-overlay-text">Floral · 20×30 cm</span>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="gallery-item"
+         onclick="addGalleryItem('Lion Portrait', '40x40')">
+      <div class="metal-art"
+           style="background:linear-gradient(135deg,#222,#1a1a1a)">
+        🦁
+      </div>
+      <div class="gallery-overlay">
+        <span class="gallery-overlay-text">Portrait animal · 40×40 cm</span>
+      </div>
+    </div>
+
+  </div>
+</section>
 
       <!-- ======= PROCESS ======= -->
       <section class="process container" id="processus">
@@ -307,201 +401,6 @@
 
     <script src="script.js"></script>
 
-<script>
-// State
-let state = {
-  basePrice: 490,
-  qty: 1,
-  selectedSize: '30x40',
-  finish: 'glossy',
-  imageUrl: null,
-  rotAngle: -25,
-  isPlaying: true
-};
 
-// Manual rotation
-let manualAngle = null;
-const wrapper = document.getElementById('panelWrapper');
-const rotLabel = document.getElementById('rotLabel');
-
-document.getElementById('btnRotLeft').addEventListener('click', () => {
-  if (manualAngle === null) manualAngle = -25;
-  manualAngle -= 30;
-  applyManualRotation();
-});
-document.getElementById('btnRotRight').addEventListener('click', () => {
-  if (manualAngle === null) manualAngle = -25;
-  manualAngle += 30;
-  applyManualRotation();
-});
-
-function applyManualRotation() {
-  wrapper.style.animation = 'none';
-  wrapper.style.transform = `rotateY(${manualAngle}deg) rotateX(3deg)`;
-  state.isPlaying = false;
-  document.getElementById('btnPlayPause').textContent = '▶';
-  rotLabel.textContent = `${Math.round(((manualAngle % 360) + 360) % 360)}°`;
-}
-
-document.getElementById('btnPlayPause').addEventListener('click', () => {
-  state.isPlaying = !state.isPlaying;
-  if (state.isPlaying) {
-    manualAngle = null;
-    wrapper.style.transform = '';
-    wrapper.style.animation = 'autoRotate 12s ease-in-out infinite';
-    document.getElementById('btnPlayPause').textContent = '⏸';
-    rotLabel.textContent = 'Auto-rotation';
-  } else {
-    wrapper.style.animation = 'none';
-    document.getElementById('btnPlayPause').textContent = '▶';
-  }
-});
-
-// Drag to rotate
-let isDragging = false;
-let dragStartX = 0, dragStartAngle = 0;
-wrapper.addEventListener('mousedown', (e) => {
-  isDragging = true;
-  dragStartX = e.clientX;
-  dragStartAngle = manualAngle ?? -25;
-  wrapper.style.animation = 'none';
-  state.isPlaying = false;
-  document.getElementById('btnPlayPause').textContent = '▶';
-  e.preventDefault();
-});
-window.addEventListener('mousemove', (e) => {
-  if (!isDragging) return;
-  const delta = (e.clientX - dragStartX) * 0.5;
-  manualAngle = dragStartAngle + delta;
-  wrapper.style.transform = `rotateY(${manualAngle}deg) rotateX(3deg)`;
-  rotLabel.textContent = `${Math.round(((manualAngle % 360) + 360) % 360)}°`;
-});
-window.addEventListener('mouseup', () => { isDragging = false; });
-wrapper.addEventListener('touchstart', (e) => {
-  isDragging = true;
-  dragStartX = e.touches[0].clientX;
-  dragStartAngle = manualAngle ?? -25;
-  wrapper.style.animation = 'none';
-  state.isPlaying = false;
-  document.getElementById('btnPlayPause').textContent = '▶';
-});
-window.addEventListener('touchmove', (e) => {
-  if (!isDragging) return;
-  const delta = (e.touches[0].clientX - dragStartX) * 0.5;
-  manualAngle = dragStartAngle + delta;
-  wrapper.style.transform = `rotateY(${manualAngle}deg) rotateX(3deg)`;
-});
-window.addEventListener('touchend', () => { isDragging = false; });
-
-// Image upload
-function handleImageUpload(input) {
-  if (!input.files || !input.files[0]) return;
-  const file = input.files[0];
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    state.imageUrl = e.target.result;
-    const canvas = document.getElementById('panelCanvas');
-    const placeholder = document.getElementById('panelPlaceholder');
-    placeholder.style.display = 'none';
-    canvas.style.backgroundImage = `url(${state.imageUrl})`;
-    canvas.style.backgroundSize = 'cover';
-    canvas.style.backgroundPosition = 'center';
-    document.getElementById('uploadName').textContent = '✓ ' + file.name;
-    showToast('Photo chargée avec succès !');
-  };
-  reader.readAsDataURL(file);
-}
-
-// Size
-function selectSize(el) {
-  document.querySelectorAll('.size-option').forEach(o => o.classList.remove('active'));
-  el.classList.add('active');
-  state.basePrice = parseInt(el.dataset.price);
-  state.selectedSize = el.dataset.size;
-  updatePrice();
-  updatePanelAspect(el.dataset.size);
-}
-
-function updatePanelAspect(size) {
-  const [w, h] = size.split('x').map(Number);
-  const ratio = w / h;
-  const pw = document.getElementById('panelWrapper');
-  const baseH = 260;
-  const newW = Math.round(baseH * ratio);
-  pw.style.width = newW + 'px';
-  pw.style.height = baseH + 'px';
-}
-
-// Finish
-function selectFinish(el) {
-  document.querySelectorAll('.finish-option').forEach(o => o.classList.remove('active'));
-  el.classList.add('active');
-  state.finish = el.dataset.finish;
-  applyFinish(state.finish);
-}
-
-function applyFinish(finish) {
-  const front = document.getElementById('panelFront');
-  const sheen = document.getElementById('sheen');
-  front.style.background = '';
-  switch(finish) {
-    case 'glossy':
-      front.style.background = '#C8C8C8';
-      sheen.style.opacity = '1';
-      break;
-    case 'matte':
-      front.style.background = 'linear-gradient(135deg, #8a8a8a, #7a7a7a)';
-      sheen.style.opacity = '0.2';
-      break;
-    case 'brushed':
-      front.style.background = 'repeating-linear-gradient(90deg,#aaa 0px,#bbb 1px,#999 2px,#aaa 4px)';
-      sheen.style.opacity = '0.4';
-      break;
-    case 'gold':
-      front.style.background = 'linear-gradient(135deg, #C8A96E, #8B6F3E, #C8A96E)';
-      sheen.style.opacity = '0.8';
-      break;
-  }
-}
-
-// Qty
-function changeQty(delta) {
-  const input = document.getElementById('qtyVal');
-  let v = parseInt(input.value) + delta;
-  v = Math.max(1, Math.min(99, v));
-  input.value = v;
-  state.qty = v;
-  updatePrice();
-}
-
-function updatePrice() {
-  state.qty = parseInt(document.getElementById('qtyVal').value) || 1;
-  document.getElementById('priceNum').textContent = (state.basePrice * state.qty).toLocaleString('fr-MA');
-}
-
-// Cart
-function addToCart() {
-  if (!state.imageUrl) {
-    showToast('⚠ Veuillez d\'abord télécharger votre photo !');
-    return;
-  }
-  showToast(`✦ Tableau ${state.selectedSize} cm ajouté au panier !`);
-}
-
-function saveConfig() {
-  showToast('☆ Configuration sauvegardée dans votre profil.');
-}
-
-// Toast
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-// Init
-updatePrice();
-</script>
   </body>
 </html>
